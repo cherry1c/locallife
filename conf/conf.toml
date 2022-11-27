@@ -1,0 +1,15 @@
+[local_life]
+name = "local-life"
+[local_life.server]
+ip = "0.0.0.0"
+[local_life.server.srpc]
+port = 8050
+[local_life.service]
+handle_timeout = "5s"
+
+[local_life.mysql.locallife]
+username = "root"
+password = "root"
+address = "local_life:3306"
+db_name = "local_life"
+
