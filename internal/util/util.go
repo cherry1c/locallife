@@ -8,6 +8,7 @@ import (
 	"locallife/internal/errcode"
 	"locallife/pkg/log"
 	"net/http"
+	"strconv"
 )
 
 func StructToMap(str interface{}) (map[string]interface{}, error) {
@@ -61,4 +62,49 @@ func GetRequest(reader io.Reader, request interface{}) {
 			log.String("body", string(body)),
 			log.ErrorF(err))
 	}
+}
+
+func ParseUint(s string, bitSize int) (uint64, error) {
+	ans, err := strconv.ParseUint(s, 10, bitSize)
+	if err != nil {
+		log.Error("parse uint failed", log.String("value", s), log.ErrorF(err))
+		return 0, err
+	}
+	return ans, nil
+}
+
+func ParseInt(s string, bitSize int) (int64, error) {
+	ans, err := strconv.ParseInt(s, 10, bitSize)
+	if err != nil {
+		log.Error("parse int failed", log.String("value", s), log.ErrorF(err))
+		return 0, err
+	}
+	return ans, nil
+}
+
+func StrToUint64(s string) (uint64, error) {
+	return ParseUint(s, 64)
+}
+
+func StrToInt64(s string) (int64, error) {
+	return ParseInt(s, 64)
+}
+
+func StrToUint32(s string) (uint32, error) {
+	ui64, err := ParseUint(s, 32)
+	return uint32(ui64), err
+}
+
+func StrToInt32(s string) (int32, error) {
+	i64, err := ParseUint(s, 32)
+	return int32(i64), err
+}
+
+func TypeToString(t interface{}) string {
+	b, err := json.Marshal(t)
+	if err != nil {
+		log.Error("marshal failed", log.ErrorF(err))
+		return ""
+	}
+	return string(b)
 }

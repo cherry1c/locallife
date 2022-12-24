@@ -5,6 +5,8 @@ import (
 	"github.com/spf13/viper"
 )
 
+var ProjectName string = "local_life"
+
 func InitFromFile(fname, ftype string, fpath ...string) {
 	viper.SetConfigName(fname)
 	viper.SetConfigType(ftype)
@@ -31,6 +33,10 @@ func GetBool(key string) bool {
 
 func GetInt32(key string) int32 {
 	return viper.GetInt32(key)
+}
+
+func GetInt(key string) int {
+	return viper.GetInt(key)
 }
 
 func GetString(key string) string {

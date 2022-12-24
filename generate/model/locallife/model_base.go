@@ -30,7 +30,9 @@ var (
 func init() {
 	tables = make(map[string]*TableInfo)
 
+	tables["grid_option"] = grid_optionTableInfo
 	tables["image_res"] = image_resTableInfo
+	tables["shops"] = shopsTableInfo
 }
 
 // String describe the action
